@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { check } from '@tauri-apps/plugin-updater';
 import { relaunch } from '@tauri-apps/plugin-process';
-import { getVersion } from '@tauri-apps/api/app';
 import './App.css';
 import { Button } from '@/components/ui/button.tsx';
 import { PlusCircle } from 'lucide-react';
-import { Quote } from '@/types/quotes.ts';
+import { Quote } from '@/types/quote.ts';
 import { DataTable } from '@/components/quotes/data-table.tsx';
 import { columns } from '@/components/quotes/columns.tsx';
 
