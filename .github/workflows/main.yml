@@ -25,15 +25,21 @@ jobs:
                 uses: actions/setup-node@v4
                 with:
                     node-version: lts/*
-                    cache:        'pnpm' # Set this to npm, yarn or pnpm.
             
             -   name: install pnpm
                 run:  npm install -g pnpm
             
-            -   name: install Rust stable
-                uses: dtolnay/rust-toolchain@stable # Set this to dtolnay/rust-toolchain@nightly
+            -   name: setup pnpm cache
+                uses: actions/cache@v3
                 with:
-                    # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builds.
+                    path:         ~/.pnpm-store
+                    key:          ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+                    restore-keys: |
+                                  ${{ runner.os }}-pnpm-
+            
+            -   name: install Rust stable
+                uses: dtolnay/rust-toolchain@stable
+                with:
                     targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
             
             -   name: Rust cache
@@ -42,14 +48,13 @@ jobs:
                     workspaces: './src-tauri -> target'
             
             -   name: install frontend dependencies
-                # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
-                run:  pnpm install # change this to npm or pnpm depending on which one you use.
+                run:  pnpm install
             
             -   uses: tauri-apps/tauri-action@v0
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 with:
-                    tagName:      app-v__VERSION__ # the action automatically replaces __VERSION__ with the app version.
+                    tagName:      app-v__VERSION__
                     releaseName:  'App v__VERSION__'
                     releaseBody:  'See the assets to download this version and install.'
                     releaseDraft: true
