@@ -35,7 +35,7 @@
     },
     "plugins":     {
         "updater": {
-            "pubkey":    "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDU1RTNBNjg4OEQ2MEIxNTcKUldSWHNXQ05pS2JqVlhWcjdqN29UT1JPSVVUVHozZm5BSjg0azgraENGSEZkRnVMR0J3U3NaNjcK",
+            "pubkey":    "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDRGM0UwNTkxOURFNEJDQzMKUldURHZPU2RrUVUrVDhUNWlVSXBTaTlZMGZDbU16MXVvOUVXQ08yRjBjempReVFBdzhNK2R0MTEK",
             "endpoints": [
                 "https://github.com/d-loki/dci-react/releases/latest/download/latest.json"
             ],
