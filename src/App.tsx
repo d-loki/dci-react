@@ -2,11 +2,10 @@ import { useEffect } from 'react';
 import { check } from '@tauri-apps/plugin-updater';
 import { relaunch } from '@tauri-apps/plugin-process';
 import './App.css';
-import { Button } from '@/components/ui/button.tsx';
-import { PlusCircle } from 'lucide-react';
-import { Quote } from '@/types/quote.ts';
-import { DataTable } from '@/components/quotes/data-table.tsx';
-import { columns } from '@/components/quotes/columns.tsx';
+import { Quote } from '@/types/quote';
+import { DataTable } from '@/components/quotes/data-table';
+import { columns } from '@/components/quotes/columns';
+import { CreateQuoteDialog } from '@/components/quotes/create-quote-dialog';
 
 // Sample data
 const sampleQuotes: Quote[] = [
@@ -80,26 +79,17 @@ function App() {
         performUpdate();
     }, [] );
 
-    const handleCreateQuote = () => {
-        console.log( 'Create new quote' );
-    };
-
     return (
-        <div className="min-h-screen bg-background p-8">
-            <div className="container mx-auto">
-                <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-3xl font-bold">Devis</h1>
-                    <Button onClick={ handleCreateQuote }>
-                        <PlusCircle className="mr-2 h-4 w-4" />
-                        Nouveau devis
-                    </Button>
-                </div>
-
-                <div className="bg-white rounded-lg shadow p-6">
-                    <DataTable columns={ columns } data={ sampleQuotes } />
-                </div>
+        <>
+            <div className="flex justify-between items-center mb-8">
+                <h1 className="text-3xl font-bold">Devis</h1>
+                <CreateQuoteDialog />
             </div>
-        </div>
+
+            <div className="bg-white rounded-lg shadow p-6">
+                <DataTable columns={ columns } data={ sampleQuotes } />
+            </div>
+        </>
     );
 }
 
